@@ -1,0 +1,56 @@
+#
+# EditorConfig is a file format and collection of text editor plugins for
+# maintaining consistent coding styles between different editors and IDEs.
+#
+# References:
+#   1. https://docs.microsoft.com/en-us/visualstudio/ide/code-styles-and-code-cleanup
+#   2. https://kent-boogaart.com/blog/editorconfig-reference-for-c-developers
+#
+root                                                            = true
+
+# All files
+[*]
+indent_style                                                    = space
+insert_final_newline                                            = false
+
+# XML project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size                                                     = 2
+
+# XML config files
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size                                                     = 2
+
+# Code files
+[*.{cs,csx,vb,vbx}]
+indent_size                                                     = 4
+charset                                                         = utf-8-bom
+
+# .NET Coding Conventions
+[*.{cs,vb}]
+end_of_line                                                     = crlf
+csharp_preferred_modifier_order                                 = public, private, protected, internal, new, abstract, virtual, sealed, override, static, readonly, extern, unsafe, volatile, async:warning
+csharp_style_implicit_object_creation_when_type_is_apparent     = true:warning
+dotnet_sort_system_directives_first                             = true
+dotnet_naming_style.pascal_case_style.capitalization            = pascal_case
+
+# Constants are UPPERCASE
+dotnet_naming_rule.constants_should_be_upper_case.severity      = warning
+dotnet_naming_rule.constants_should_be_upper_case.symbols       = constants
+dotnet_naming_rule.constants_should_be_upper_case.style         = constant_style
+dotnet_naming_symbols.constants.applicable_kinds                = field
+dotnet_naming_symbols.constants.required_modifiers              = const
+dotnet_naming_style.constant_style.capitalization               = all_upper
+
+# underscore prefix for private fields
+dotnet_naming_style.prefix_underscore.capitalization            = camel_case
+dotnet_naming_style.prefix_underscore.required_prefix           = _
+dotnet_naming_symbols.private_fields.applicable_kinds           = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_rule.private_members_with_underscore.symbols      = private_fields
+dotnet_naming_rule.private_members_with_underscore.style        = prefix_underscore
+dotnet_naming_rule.private_members_with_underscore.severity     = warning
+
+# Diagnostic
+dotnet_diagnostic.IDE0005.severity                              = warning
+dotnet_diagnostic.CA1707.severity                               = none

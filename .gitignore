@@ -1,0 +1,8 @@
+# Directories
+.vs/
+.vscode/
+artifacts/
+.maid/
+
+# Files
+*.csproj.user
