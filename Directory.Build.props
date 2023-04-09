@@ -1,5 +1,5 @@
 <Project>
 
-  <Import Project="Directory.Artifacts.props" />
-  
+  <Import Project="build\Artifacts.props" />
+
 </Project>

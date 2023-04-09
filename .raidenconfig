@@ -4,6 +4,6 @@
     <Number>1</Number>
     <Version>1.0.0-preview.1</Version>
   </Build>
-  <Script>build.ps1</Script>
+  <Script>build\build.ps1</Script>
   <UpdateBeforeScript>false</UpdateBeforeScript>
 </Configuration>
