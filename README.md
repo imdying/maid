@@ -11,6 +11,21 @@ In a nutshell, Maid serves as an abstraction layer for [System.CommandLine](http
 - [Wikipedia](https://github.com/imdying/maid/wiki/Maid)
 - [System.CommandLine](https://github.com/imdying/maid/wiki/System.CommandLine)
 
+## How to Build
+
+1. Clone the repository:
+
+        git clone https://github.com/imdying/maid.git
+        cd maid
+
+2. Install [Raiden](https://github.com/imdying/raiden):
+
+        dotnet tool install -g Raiden
+
+3. Build the project:
+
+        raiden build
+
 ## License
 
 This project is licensed under the [MIT license](/LICENSE.md).
