@@ -1,0 +1,10 @@
+﻿<Project>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+
+    <PackageOutputPath>$(ArtifactsDir)NuGet</PackageOutputPath>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+  </PropertyGroup>
+
+</Project>

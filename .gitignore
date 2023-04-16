@@ -3,6 +3,7 @@
 .vscode/
 .raiden/
 artifacts/
+playground/Testing/Commands/
 
 # Files
 *.csproj.user

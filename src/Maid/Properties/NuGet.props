@@ -1,0 +1,22 @@
+﻿<Project>
+
+  <PropertyGroup>
+    
+    <PackageId>Maid</PackageId>
+    <Authors>$(Company)</Authors>
+    <PackageVersion>$(Version)</PackageVersion>
+    <Description>A command-line interpreter for your CLI applications.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/imdying/maid</RepositoryUrl>
+    <PackageReleaseNotes>The changelog can be found at https://github.com/imdying/maid/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <PackageTags>cmd;command;cli;console;terminal;shell;commandline;interpreter;processor;parser;handler;</PackageTags>
+    <PackageReadmeFile>\README.md</PackageReadmeFile>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+</Project>

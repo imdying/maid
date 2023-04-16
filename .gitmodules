@@ -1,0 +1,3 @@
+[submodule "src/Maid.CLI"]
+	path = src/Maid.CLI
+	url = https://github.com/imdying/command-line-api.git
