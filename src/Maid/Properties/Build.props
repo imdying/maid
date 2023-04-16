@@ -2,7 +2,7 @@
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
 
-    <PackageOutputPath>$(ArtifactsDir)NuGet</PackageOutputPath>
+    <PackageOutputPath>$(BaseArtifactPath)NuGet</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
   </PropertyGroup>
