@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Maid\Maid.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Units\" />
-  </ItemGroup>
-
 </Project>

@@ -1,1 +1,1 @@
-﻿new CommandLine().Invoke(args);
+﻿return new CommandLine().Invoke(args);

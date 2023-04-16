@@ -80,7 +80,9 @@ internal sealed class PropertiesHandler
         }
     }
 
-    private void SetValue(PropertyInfo property, object? value)
+    private void SetValue(PropertyInfo property, object? value) => SetValue(_command, property, value);
+
+    internal static void SetValue(object target, PropertyInfo property, object? value)
     {
         ArgumentNullException.ThrowIfNull(property);
 
@@ -101,7 +103,7 @@ internal sealed class PropertiesHandler
         // Preserve the default value of the property if the param 'value' is null.
         if (value is not null)
         {
-            property.SetValue(_command, value);
+            property.SetValue(target, value);
         }
     }
 
