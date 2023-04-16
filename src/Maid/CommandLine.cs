@@ -11,57 +11,28 @@ namespace Maid;
 /// <summary>
 /// Provides a command-line interpreter for command-line interface applications.
 /// </summary>
-public sealed class CommandLine
+public sealed class CommandLine : ICommandLineFluentInterface<CommandLine>
 {
     private static bool _verboseEnabled = true;
     private readonly CliConfiguration _cfg;
     private readonly CliRootCommand _root;
-    private string[]? _arguments;
-    private string? _description;
 
-    public CommandLine(string[] args)
+    public CommandLine()
     {
-        _root = new();
+        _root = new(Resources.SymbolNoDescription);
         _cfg = new(_root);
-
-        Arguments = args;
         Parser = new(this);
-    }
-
-    /// <summary>
-    /// Gets or sets the arguments to be parsed.
-    /// </summary>
-    public string[] Arguments
-    {
-        get => _arguments ??= Array.Empty<string>();
-        set => _arguments = value;
     }
 
     /// <summary>
     /// Gets or sets the <see cref="System.Reflection.Assembly">assembly</see> which contains the <see cref="Command">commands</see>.
     /// </summary>
-    public Assembly Assembly { get; set; } = Assembly.GetCallingAssembly();
+    internal Assembly Assembly { get; private set; } = Assembly.GetCallingAssembly();
 
-#if DEBUG
-    /// <summary>
-    /// If set to <see langword="true"/>, the "contracts" aka commands, are cached.
-    /// </summary>
-    public bool Cache => throw new NotImplementedException();
-#endif
-
-    /// <summary>
-    /// Gets or sets the description of the application.
-    /// </summary>
-    public string Description
+    internal CommandLineParser Parser
     {
-        get => _description ??= Resources.SymbolNoDescription;
-        set 
-        {
-            if (!string.IsNullOrEmpty(value))
-            {
-                _root.Description = _description = value;
-            }
-        }
+        get;
+        private set;
     }
 
     /// <summary>
@@ -73,14 +44,7 @@ public sealed class CommandLine
     /// <br/>
     /// In Windows operating systems, the forward slash (/option) is commonly used as a prefix to indicate a short option, typically one or two characters.
     /// </remarks>
-    public string? Prefix { get; set; } = "/";
-
-    internal CommandLineParser Parser
-    {
-        get;
-        set;
-    }
-
+    internal string? Prefix { get; private set; } = "/";
     /// <summary>
     /// Kills the application and exit with a non-zero exit code.
     /// </summary>
@@ -148,19 +112,45 @@ public sealed class CommandLine
     /// <param name="value">The value to write.</param>
     public static void WriteWarning(object? value) => WriteRawWarning(string.Format("Warning: {0}", value));
 
-    public int Invoke()
+    public CommandLine AddDescription(string description)
+    {
+        if (!string.IsNullOrEmpty(description))
+        {
+            _root.Description = description;
+        }
+
+        return this;
+    }
+
+    public CommandLine AddPrefix(string prefix)
+    {
+        if (string.IsNullOrWhiteSpace(prefix))
+        {
+            Prefix = prefix;
+        }
+
+        return this;
+    }
+
+    public int Invoke(IEnumerable<string> args)
     {
         foreach (var command in Parser.GetResults())
         {
             AddCommand(command);
         }
 
-        if (Arguments.Length == 0)
+        if (!args.Any())
         {
-            AddArgument("--help");
+            args = args.Append("--help");
         }
 
-        return _cfg.Invoke(Arguments);
+        return _cfg.Invoke(args.ToArray());
+    }
+
+    public CommandLine SelectAssembly(Assembly assembly)
+    {
+        ArgumentNullException.ThrowIfNull(Assembly = assembly);
+        return this;
     }
 
     private static void InternalWriteError(object? value)
@@ -175,20 +165,6 @@ public sealed class CommandLine
         Console.ForegroundColor = color;
         Console.WriteLine(value);
         Console.ResetColor();
-    }
-
-    private void AddArgument(string value)
-    {
-        if (_arguments is null)
-        {
-            _arguments = Array.Empty<string>();
-        }
-
-        var oldSize = _arguments.Length;
-        var newSize = _arguments.Length + 1;
-
-        Array.Resize(ref _arguments, newSize);
-        _arguments.SetValue(value, oldSize);
     }
 
     private void AddCommand(Command command)

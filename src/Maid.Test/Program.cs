@@ -1,0 +1,1 @@
+﻿new CommandLine().Invoke(args);
