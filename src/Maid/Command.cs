@@ -21,6 +21,15 @@ public abstract class Command
         {
             Name = PascalToKebabCase(Inheritor.Name).ToLower();
         }
+        else
+        {
+            if (Properties.Name.Contains(' '))
+            {
+                throw new ArgumentException($"Names and aliases cannot contain whitespace at {Inheritor.Name}");
+            }
+
+            Name = Properties.Name;
+        }
 
         #region Adds synopsis to description.
         if (string.IsNullOrWhiteSpace(Properties.Description))
@@ -78,7 +87,7 @@ public abstract class Command
 
     internal string Name
     {
-        get => _name ?? throw new ArgumentNullException(nameof(Name));
+        get => _name ??= Properties.Name ?? throw new ArgumentNullException(nameof(Name));
         set
         {
             if (string.IsNullOrWhiteSpace(value))
