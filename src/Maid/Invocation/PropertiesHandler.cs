@@ -38,7 +38,7 @@ internal sealed class PropertiesHandler
             {
                 foreach (var argument in current.Arguments.Keys)
                 {
-                    var result = parseResult.FindResultFor(argument);
+                    var result = parseResult.GetResult(argument);
 
                     if (result is not null)
                     {
