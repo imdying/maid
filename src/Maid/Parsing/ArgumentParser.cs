@@ -32,7 +32,7 @@ internal static class ArgumentParser
                 break;
 
             case OptionAttribute option:
-                option.Name = string.Format("{0}{1}", parser._commandLine.Prefix, attribute.Name);
+                option.Name = string.Format("{0}{1}", parser._builder.Prefix, attribute.Name);
                 break;
 
             default:
