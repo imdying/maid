@@ -8,6 +8,9 @@
 /// </remarks>
 public enum ArgumentArity : uint
 {
+    /// <summary>
+    /// The default value defined in the System.CommandLine library.
+    /// </summary>
     Default,
 
     /// <summary>

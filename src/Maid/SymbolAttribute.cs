@@ -3,7 +3,7 @@
 namespace Maid;
 
 /// <summary>
-/// A symbol defining a value that can be passed on the command line to a <see cref="Command">command</see> or <see cref="OptionAttribute">option</see>.
+///  Provides a base class for defining a value that can be passed on the command line to a <see cref="Command">command</see>.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public abstract class SymbolAttribute : Attribute
@@ -21,7 +21,7 @@ public abstract class SymbolAttribute : Attribute
     }
 
     /// <summary>
-    /// Defines the arity of the argument.
+    /// Gets or sets the arity of the argument.
     /// </summary>
     public ArgumentArity Arity
     {
@@ -29,18 +29,27 @@ public abstract class SymbolAttribute : Attribute
         set;
     }
 
+    /// <summary>
+    /// Gets or sets the description of the symbol.
+    /// </summary>
     public string? Description
     {
         get => _description ??= Resources.SymbolNoDescription;
         set => _description = value;
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the symbol is hidden.
+    /// </summary>
     public bool Hidden
     {
         get;
         set;
     }
 
+    /// <summary>
+    /// Gets or sets the name of the symbol.
+    /// </summary>
     public string Name
     {
         get;

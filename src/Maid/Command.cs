@@ -15,6 +15,9 @@ public abstract class Command
 {
     private string? _name;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Command"/> class.
+    /// </summary>
     protected Command()
     {
         if (string.IsNullOrWhiteSpace(Properties.Name))
