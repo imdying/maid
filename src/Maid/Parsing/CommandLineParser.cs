@@ -4,17 +4,17 @@ namespace Maid.Parsing;
 
 internal sealed class CommandLineParser
 {
-    public readonly CommandLine _commandLine;
+    public readonly CommandLineBuilder _builder;
 
-    public CommandLineParser(CommandLine commandLine)
+    public CommandLineParser(CommandLineBuilder builder)
     {
-        _commandLine = commandLine;
+        _builder = builder;
     }
 
     public IEnumerable<Command> GetResults()
     {
         var results = new List<Command>();
-        var classes = FilterByCommand(_commandLine.Assembly.GetExportedTypes()).Where(t => !t.IsNested);
+        var classes = FilterByCommand(_builder.Assembly.GetExportedTypes()).Where(t => !t.IsNested);
 
         foreach (var @class in classes)
         {
@@ -70,6 +70,21 @@ internal sealed class CommandLineParser
     private static IEnumerable<Type> FilterByCommand(IEnumerable<Type> types) 
         => types.Where(t => typeof(Command).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
 
+    /// <summary>
+    /// Sorts the properties that have the <see cref="ArgumentAttribute"/> and adds them to the Arguments dictionary in the sorted order.
+    /// </summary>
+    private static PropertyInfo[] SortArguments(PropertyInfo[] props)
+    {
+        var arguments = props.Where(prop => Attribute.IsDefined(prop, typeof(ArgumentAttribute)));
+        var orderedBy = arguments.OrderBy(prop =>
+        {
+            var attribute = prop.GetCustomAttribute<ArgumentAttribute>();
+            return attribute is null ? throw new ArgumentNullException(nameof(prop)) : attribute.Index;
+        });
+
+        return orderedBy.ToArray();
+    }
+
     private void ParseArguments(Command command)
     {
         var props = command.Inheritor.GetProperties();
@@ -86,20 +101,5 @@ internal sealed class CommandLineParser
                 command.AddArgument(prop, this.Parse<OptionAttribute>(prop));
             }
         }
-    }
-
-    /// <summary>
-    /// Sorts the properties that have the <see cref="ArgumentAttribute"/> and adds them to the Arguments dictionary in the sorted order.
-    /// </summary>
-    private static PropertyInfo[] SortArguments(PropertyInfo[] props)
-    {
-        var arguments = props.Where(prop => Attribute.IsDefined(prop, typeof(ArgumentAttribute)));
-        var orderedBy = arguments.OrderBy(prop =>
-        {
-            var attribute = prop.GetCustomAttribute<ArgumentAttribute>();
-            return attribute is null ? throw new ArgumentNullException(nameof(prop)) : attribute.Index;
-        });
-
-        return orderedBy.ToArray();
     }
 }

@@ -2,7 +2,7 @@
 
 internal class Program
 {
-    static int Main(string[] args) => new CommandLine().AddPrefix("--")
-                                                       .AddDescription("A sample application.")
-                                                       .Invoke(args);
+    static int Main(string[] args) => new CommandLineBuilder().WithPrefix("--")
+                                                              .WithDescription("A sample application.")
+                                                              .Build(args);
 }
