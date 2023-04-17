@@ -10,6 +10,12 @@ public abstract class SymbolAttribute : Attribute
 {
     private string? _description;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SymbolAttribute"/> class with the specified name.
+    /// </summary>
+    /// <param name="name">The name of the symbol.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="name"/> is null, empty, or consists only of white space characters.
+    /// </exception>
     protected SymbolAttribute(string name)
     {
         if (string.IsNullOrWhiteSpace(name))

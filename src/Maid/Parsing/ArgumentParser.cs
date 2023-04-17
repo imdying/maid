@@ -8,15 +8,8 @@ namespace Maid.Parsing;
 internal static class ArgumentParser
 {
     /// <summary>
-    /// Parses a <see cref="PropertyInfo"/> object for a specified <see cref="SymbolAttribute"/> and returns a <see cref="CliSymbol"/> object that represents either an argument or an option.
+    ///  Parses a command line symbol from a specified property.
     /// </summary>
-    /// <typeparam name="T">The type of the SymbolAttribute to parse.</typeparam>
-    /// <param name="command">The Command object to use for parsing.</param>
-    /// <param name="property">The PropertyInfo object to parse.</param>
-    /// <returns>A CliSymbol object that represents the parsed SymbolAttribute.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if the specified SymbolAttribute is null.</exception>
-    /// <exception cref="NotSupportedException">Thrown if the specified SymbolAttribute is not an ArgumentAttribute or an OptionAttribute.</exception>
-    /// <exception cref="InvalidCastException">Thrown if the creation of the CliSymbol object fails.</exception>
     public static CliSymbol Parse<T>(this CommandLineParser parser, PropertyInfo property) where T : SymbolAttribute
     {
         SymbolAttribute? attribute;
@@ -52,11 +45,6 @@ internal static class ArgumentParser
     /// <summary>
     /// Applies the values from a <see cref="SymbolAttribute"/> to a <see cref="CliSymbol"/> object.
     /// </summary>
-    /// <typeparam name="T">The type of the SymbolAttribute.</typeparam>
-    /// <param name="symbol">The CliSymbol object to apply the values to.</param>
-    /// <param name="attribute">The SymbolAttribute to get the values from.</param>
-    /// <exception cref="ArgumentException">Thrown if the specified SymbolAttribute is not of the expected type.</exception>
-    /// <exception cref="NotSupportedException">Thrown if the CliSymbol object is not a CliArgument or a CliOption.</exception>
     private static void ApplyValues<T>(this CliSymbol symbol, T attribute) where T : SymbolAttribute
     {
         symbol.Hidden = attribute.Hidden;
