@@ -6,7 +6,7 @@
     <Authors>$(Company)</Authors>
     <PackageVersion>$(Version)</PackageVersion>
     <Description>A command-line interpreter for your CLI applications.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/imdying/maid</RepositoryUrl>
     <PackageReleaseNotes>The changelog can be found at https://github.com/imdying/maid/blob/main/CHANGELOG.md</PackageReleaseNotes>

@@ -28,4 +28,4 @@ In a nutshell, Maid serves as an abstraction layer for [System.CommandLine](http
 
 ## License
 
-This project is licensed under the [MIT license](/LICENSE.md).
+This project is licensed under the [BSD 3-Clause License](/LICENSE.md).
