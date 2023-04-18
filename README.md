@@ -8,7 +8,7 @@ In a nutshell, Maid serves as an abstraction layer for [System.CommandLine](http
 
 ## Documentation
 
-- [Wikipedia](https://github.com/imdying/maid/wiki/Maid)
+- [Wikipedia](https://github.com/imdying/maid/wiki)
 - [System.CommandLine](https://github.com/imdying/maid/wiki/System.CommandLine)
 
 ## How to Build
